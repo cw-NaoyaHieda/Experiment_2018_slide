@@ -520,7 +520,8 @@ newPackages &lt;-<span class="st"> </span>targetPackages[<span class="op">!</spa
 <p>関数近似を例にとり, テストデータに対する誤り率が最も小さくなるようなモデル選択を説明する.<br />
 今, 未知の関数が次式で与えられてるとしよう.</p>
 <p><span class="math display">\[
-f(x) = 0.5 + 0.4\sin(2\pi x) +\varepsilon = h(x) + \varepsilon, ~~~\varepsilon\sim N(0,0.05)
+f(x) = 0.5 + 0.4\sin(2\pi x) +\varepsilon = h(x) + \varepsilon,\\
+\varepsilon\sim N(0,0.05)
 \]</span></p>
 <p>ノイズの含まれた観測値から未知の関数<span class="math inline">\(h(x)\)</span>を知りたい. <span class="math inline">\(h(x)\)</span>は未知なので<span class="math inline">\(p\)</span>次多項式による曲線近似によって推定する.</p>
 <p><span class="math display">\[
