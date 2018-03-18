@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Naoya Hieda" />
+  <meta name="dcterms.date" content="2018-02-09" />
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="toc.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title"><dl>
+<dt>情報工学実験3</dt>
+<dd>パターン認識I 第一回
+</dd>
+<dd>モデル評価とデータ前処理
+</dd>
+</dl></h1>
+    <h2 class="author">Naoya Hieda</h2>
+    <h3 class="date">2018-02-09</h3>
+</section>
+
+<section><section id="パッケージのインストールと読み込み" class="titleslide slide level1"><h1>パッケージのインストールと読み込み</h1></section><section id="使用するパッケージを自動インストールして読み込む" class="slide level2">
+<h2>使用するパッケージを自動インストールして読み込む。</h2>
+<p>今回使用するパッケージは</p>
+<ul>
+<li>ggplot2</li>
+<li>tidyr</li>
+<li>reshape2</li>
+<li>MASS</li>
+</ul>
+<p>MASSはデフォルトパッケージだが、更新したバージョンのデータセットを用いるので、インストールする。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 持ってないパッケージはインストールする</span>
+targetPackages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;reshape2&quot;</span>,<span class="st">&quot;MASS&quot;</span>)
+newPackages &lt;-<span class="st"> </span>targetPackages[<span class="op">!</span>(targetPackages <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>])]
+<span class="cf">if</span> (<span class="kw">length</span>(newPackages)) <span class="kw">install.packages</span>(newPackages, <span class="dt">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>)
+<span class="cf">for</span> (package <span class="cf">in</span> targetPackages) <span class="kw">library</span>(package, <span class="dt">character.only =</span> T)</code></pre></div>
+</section></section>
+<section><section id="汎化能力評価法とモデル選択" class="titleslide slide level1"><h1>1.1.1 汎化能力評価法とモデル選択</h1></section><section id="モデル選択" class="slide level2">
+<h2>モデル選択</h2>
+<p>関数近似を例にとり, テストデータに対する誤り率が最も小さくなるようなモデル選択を説明する.<br />
+今, 未知の関数が次式で与えられてるとしよう.</p>
+<p><span class="math display">\[
+f(x) = 0.5 + 0.4\sin(2\pi x) +\varepsilon = h(x) + \varepsilon, ~~~\varepsilon\sim N(0,0.05)
+\]</span></p>
+<p>ノイズの含まれた観測値から未知の関数<span class="math inline">\(h(x)\)</span>を知りたい. <span class="math inline">\(h(x)\)</span>は未知なので<span class="math inline">\(p\)</span>次多項式による曲線近似によって推定する.</p>
+<p><span class="math display">\[
+y(x, a) = a_0 + a_1 x + a_2 x^2 + \cdots + a_p x^p, ~~~
+a = (a_0, a_1, a_2, \ldots, a_p )^T
+\]</span> 多項式の係数<span class="math inline">\(a\)</span>は最小２乗法により求めることができる.</p>
+</section><section id="サンプリング" class="slide level2">
+<h2>サンプリング</h2>
+<p><span class="math inline">\(x\)</span>として区間<span class="math inline">\((0,1)\)</span>から等間隔に11点をサンプリングしたとする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#乱数の種の設定、以降発生する乱数は全員一緒のハズ</span>
+<span class="kw">set.seed</span>(<span class="dv">101</span>)
+<span class="co"># 区間[0,1]を11分割した系列</span>
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">11</span>)
+<span class="co"># そこからyを発生</span>
+y &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">+</span><span class="fl">0.4</span><span class="op">*</span><span class="kw">sin</span>(x<span class="op">*</span><span class="dv">2</span><span class="op">*</span>pi) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">11</span>,<span class="dt">sd=</span><span class="kw">sqrt</span>(<span class="fl">0.05</span>))
+<span class="co"># ggplotするためにデータフレームにまとめる</span>
+sample_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)
+<span class="co"># 真の関数のプロット準備</span>
+dx &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">length=</span><span class="dv">100</span>)
+y.true &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">+</span><span class="fl">0.4</span><span class="op">*</span><span class="kw">sin</span>( dx<span class="op">*</span><span class="dv">2</span><span class="op">*</span>pi)</code></pre></div>
+</section><section id="データ確認" class="slide level2">
+<h2>データ確認</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> dx, <span class="dt">y =</span> y.true)
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> true_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;True&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sample_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;Sample&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" /></p>
+</section><section id="多項式回帰の関数と三次式回帰" class="slide level2">
+<h2>多項式回帰の関数と三次式回帰</h2>
+<p>先ほどサンプリングしたxとyから、三次式の回帰を行う</p>
+<p><span class="math display">\[
+  y(x, a) = a_0 + a_1 x + a_2 x^2 + a_3 x^3, ~~~
+  a = (a_0, a_1, a_2, a_3 )^T
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">non.linear.regression&lt;-<span class="st"> </span><span class="cf">function</span>(x, y , order){
+  <span class="co"># p次多項式の準備</span>
+  X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>, <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>order, <span class="cf">function</span>(x,a) a<span class="op">^</span>x, <span class="dt">a=</span>x))
+  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(y, X)
+  <span class="co"># 非線形回帰</span>
+  lm.out &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>X<span class="op">-</span><span class="dv">1</span>, <span class="dt">data=</span>df)
+  <span class="co"># 回帰した式で、学習の際にしようした点のy値を確認(yの予測値)</span>
+  fit &lt;-<span class="st"> </span>lm.out<span class="op">$</span>fitted
+  dx &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">length=</span><span class="dv">100</span>)
+  X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>, <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>order, <span class="cf">function</span>(x, a) a<span class="op">^</span>x, <span class="dt">a =</span> dx))
+  fit.h &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(X <span class="op">%*%</span><span class="st"> </span>lm.out<span class="op">$</span>coeff)
+  <span class="kw">list</span>(<span class="dt">fit=</span>fit, <span class="dt">fit.hx=</span>fit.h)
+}</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 三次式に対して回帰する</span>
+fit.p3 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">3</span>)
+
+fit_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> dx, <span class="dt">y =</span> fit.p3<span class="op">$</span>fit.hx)
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> true_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;True&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sample_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;Sample&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;Estimate&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="576" /></p>
+</section><section id="n次式回帰を2回づつ" class="slide level2">
+<h2>n次式回帰を2回づつ</h2>
+<p>1次、3次、6次、10次式の非線形回帰を2回づつ行なう</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.p1 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">1</span>)
+fit.p3 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">3</span>)
+fit.p6 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">6</span>)
+fit.p10 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">10</span>)
+
+fit_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> dx,
+                       <span class="dt">p1 =</span> fit.p1<span class="op">$</span>fit.hx,
+                       <span class="dt">p3 =</span> fit.p3<span class="op">$</span>fit.hx,
+                       <span class="dt">p6 =</span> fit.p6<span class="op">$</span>fit.hx,
+                       <span class="dt">p10 =</span> fit.p10<span class="op">$</span>fit.hx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="st">&quot;x&quot;</span>)
+
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">11</span>)
+<span class="co"># 区間[0,1]を11分割した系列</span>
+y &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">+</span><span class="fl">0.4</span><span class="op">*</span><span class="kw">sin</span>(x<span class="op">*</span><span class="dv">2</span><span class="op">*</span>pi) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">11</span>,<span class="dt">sd=</span><span class="kw">sqrt</span>(<span class="fl">0.05</span>))
+<span class="co">#plot(x,y)</span>
+sample_data2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)
+
+fit.p1 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">1</span>)
+fit.p3 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">3</span>)
+fit.p6 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">6</span>)
+fit.p10 &lt;-<span class="st"> </span><span class="kw">non.linear.regression</span>(x, y ,<span class="dt">order=</span><span class="dv">10</span>)
+
+fit_data2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> dx,
+                       <span class="dt">p1 =</span> fit.p1<span class="op">$</span>fit.hx,
+                       <span class="dt">p3 =</span> fit.p3<span class="op">$</span>fit.hx,
+                       <span class="dt">p6 =</span> fit.p6<span class="op">$</span>fit.hx,
+                       <span class="dt">p10 =</span> fit.p10<span class="op">$</span>fit.hx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="st">&quot;x&quot;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> true_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;True&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sample_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;pattern1&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sample_data2, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;pattern2&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> value, <span class="dt">color =</span> <span class="st">&quot;pattern1&quot;</span>),<span class="dt">linetype=</span><span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data2, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> value, <span class="dt">color =</span> <span class="st">&quot;pattern2&quot;</span>),<span class="dt">linetype=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="co">#geom_point(data = pre_data, aes(x=x, y= value, color = variable)) +</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="co">#+ theme(legend.position = &quot;none&quot;)</span></code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" /></p>
+</section><section class="slide level2">
+
+<p>このように, <span class="math inline">\(p=1\)</span>の場合は, データから大きく外れいている(バイアスが大きい)<br />
+逆に，<span class="math inline">\(p=10\)</span>の場合は,データにぴったり当てはまっているが、二本の推定結果で大きく結果が異なる(分散が大きい)</p>
+<p>このようにバイアスを小さくすれば分散が大きくなり, 逆に分散を小さくすれば, バイアスが大きくなる現象をバイアス・分散トレードオフといい, 汎化能力を決める大きな要因となる.</p>
+<p>バイアスと分散を100個のデータ・セットから求めてみる.</p>
+<p><span class="math display">\[
+E_D \{ (y(x; D) -h(x))^2  \} =\\
+\left(E_D \{ y(x; D\}- h(x)  \right)^2
++
+E_D \{ (y(x; D) -E_D\{ y(x;D)\})^2  \} 
+\]</span></p>
+</section><section id="バイアス項と分散項" class="slide level2">
+<h2>バイアス項と分散項</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trade.off&lt;-<span class="cf">function</span>(order){
+  bias.var.trade.off &lt;-<span class="st"> </span><span class="cf">function</span>(order){
+    x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">11</span>) <span class="co"># 区間[0,1]を11分割した系列</span>
+    y &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">+</span><span class="fl">0.4</span><span class="op">*</span><span class="kw">sin</span>(x<span class="op">*</span><span class="dv">2</span><span class="op">*</span>pi) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">11</span>,<span class="dt">sd=</span><span class="kw">sqrt</span>(<span class="fl">0.05</span>))
+    X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>, <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>order, <span class="cf">function</span>(x,a) a<span class="op">^</span>x, <span class="dt">a=</span>x))
+    df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(y, X)
+    lm.out &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>X<span class="op">-</span><span class="dv">1</span>, <span class="dt">data=</span>df)
+    fit &lt;-<span class="st"> </span>lm.out<span class="op">$</span>fitted
+    y.true &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">+</span><span class="fl">0.4</span><span class="op">*</span><span class="kw">sin</span>(x<span class="op">*</span><span class="dv">2</span><span class="op">*</span>pi)
+    <span class="kw">data.frame</span>(<span class="dt">fit=</span>fit, <span class="dt">y.true=</span>y.true, <span class="dt">y=</span>y)
+  }
+  <span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">bias.var.trade.off</span>(order) ) -&gt;<span class="st"> </span>out
+  y.mat &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="cf">function</span>(x) out[,x]<span class="op">$</span>y)
+  fit.mat &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="cf">function</span>(x) out[,x]<span class="op">$</span>fit)
+  y.true.mat &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="cf">function</span>(x) out[,x]<span class="op">$</span>y.true)
+  ## バイアス項
+  bias.p &lt;-<span class="st"> </span><span class="kw">sum</span>((<span class="kw">apply</span>(fit.mat,<span class="dv">1</span>, mean) <span class="op">-</span><span class="st"> </span>y.true.mat[,<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span>)
+  ## 分散項
+  var.p &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">apply</span>(fit.mat,<span class="dv">1</span>,var))
+  ## MSE
+  mse.p &lt;-<span class="st">  </span>var.p<span class="op">+</span>bias.p
+  <span class="co">#mse.p &lt;-</span>
+  <span class="kw">return</span>(<span class="kw">c</span>(<span class="dt">mse=</span>mse.p, <span class="dt">var.p=</span>var.p, <span class="dt">bias.p =</span>bias.p))
+}</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out&lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,trade.off)
+<span class="kw">ggplot</span>(
+  <span class="kw">data.frame</span>(
+    <span class="kw">cbind</span>(<span class="kw">t</span>(out),<span class="dt">p =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="st">&quot;p&quot;</span>)),
+  <span class="kw">aes</span>(<span class="dt">x=</span>p,<span class="dt">y=</span>value,<span class="dt">color=</span>variable))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">1.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" /></p>
+<p>この図より, 最適な多項式次数は, 平均２乗誤差が最小となる<span class="math inline">\(p=3\)</span>を選択すれば良い.</p>
+</section></section>
+<section><section id="データの前処理" class="titleslide slide level1"><h1>1.1.2 データの前処理</h1></section><section id="なぜ前処理をするか" class="slide level2">
+<h2>なぜ前処理をするか</h2>
+<p>入力データ<span class="math inline">\(x\)</span>は, その特徴に応じて様々な性質をもつであろう. そこで, 分析に先立ち, あらかじめ入力データの顕著な特性が大きく識別結果に影響しないように, データの前処理をすることが一般的である. 前処理には, 平均0, 分散１に基準化する標準化や, 変数間の相関関係を排除した無相関化, 標準化と無相関化を合わせた白色化等が用いられる.</p>
+</section><section id="アヤメデータの標準化" class="slide level2">
+<h2>アヤメデータの標準化</h2>
+<p>Rのデータセット、アヤメデータを用いる。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(iris)</code></pre></div>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(iris)</code></pre></div>
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50  
+                
+                
+                </code></pre>
+<p>花弁の長さ<code>Petal.Length</code>、その幅<code>Petal.Width</code>を用いる。</p>
+</section><section class="slide level2">
+
+<p>平均と共分散行列は</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">colMeans</span>(<span class="kw">cbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width))
+Sigma &lt;-<span class="st"> </span><span class="kw">var</span>(<span class="kw">cbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mu</code></pre></div>
+<pre><code>[1] 3.758000 1.199333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Sigma</code></pre></div>
+<pre><code>         [,1]      [,2]
+[1,] 3.116278 1.2956094
+[2,] 1.295609 0.5810063</code></pre>
+</section><section class="slide level2">
+
+<p>最初に生のデータをプロットする</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Petal.Length =</span> iris<span class="op">$</span>Petal.Length,
+                   <span class="dt">Petal.Width =</span> iris<span class="op">$</span>Petal.Width,
+                   <span class="dt">types =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;s&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;c&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;v&quot;</span>,<span class="dv">50</span>)))
+
+<span class="kw">summary</span>(data)</code></pre></div>
+<pre><code>  Petal.Length    Petal.Width    types 
+ Min.   :1.000   Min.   :0.100   c:50  
+ 1st Qu.:1.600   1st Qu.:0.300   s:50  
+ Median :4.350   Median :1.300   v:50  
+ Mean   :3.758   Mean   :1.199         
+ 3rd Qu.:5.100   3rd Qu.:1.800         
+ Max.   :6.900   Max.   :2.500         </code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>data,<span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length,
+                     <span class="dt">y =</span> Petal.Width,
+                     <span class="dt">label =</span> types,
+                     <span class="dt">color =</span> types))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>types),<span class="dt">hjust=</span><span class="dv">0</span>, <span class="dt">vjust=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Raw data&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" /></p>
+</section><section class="slide level2">
+
+<p>標準化してプロットする</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#scaleだけで標準化が行える</span>
+data_stand &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Petal.Length =</span> iris<span class="op">$</span>Petal.Length <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">scale</span>(),
+                         <span class="dt">Petal.Width =</span> iris<span class="op">$</span>Petal.Width <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">scale</span>(),
+                         <span class="dt">types =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;s&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;c&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;v&quot;</span>,<span class="dv">50</span>)))
+
+<span class="kw">summary</span>(data_stand)</code></pre></div>
+<pre><code>  Petal.Length      Petal.Width      types 
+ Min.   :-1.5623   Min.   :-1.4422   c:50  
+ 1st Qu.:-1.2225   1st Qu.:-1.1799   s:50  
+ Median : 0.3354   Median : 0.1321   v:50  
+ Mean   : 0.0000   Mean   : 0.0000         
+ 3rd Qu.: 0.7602   3rd Qu.: 0.7880         
+ Max.   : 1.7799   Max.   : 1.7064         </code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>data_stand,<span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length,
+                     <span class="dt">y =</span> Petal.Width,
+                     <span class="dt">label =</span> types,
+                     <span class="dt">color =</span> types))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>types),<span class="dt">hjust=</span><span class="dv">0</span>, <span class="dt">vjust=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Standardization&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" /></p>
+</section><section id="アヤメデータの無相関化" class="slide level2">
+<h2>アヤメデータの無相関化</h2>
+<p>正規直交行列は次のように求める.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># アヤメデータの花弁の長さ幅の分散共分散行列の固有値, 固有ベクトルを求める. </span>
+<span class="kw">eigen</span>(<span class="kw">var</span>(<span class="kw">cbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width)))</code></pre></div>
+<pre><code>$values
+[1] 3.66123805 0.03604607
+
+$vectors
+           [,1]       [,2]
+[1,] -0.9217777  0.3877188
+[2,] -0.3877188 -0.9217777</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 固有ベクトルは, 方向は関係ないので(-)を掛けても同じ.</span>
+S &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">eigen</span>(<span class="kw">var</span>(<span class="kw">cbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width)))<span class="op">$</span>vectors
+S</code></pre></div>
+<pre><code>          [,1]       [,2]
+[1,] 0.9217777 -0.3877188
+[2,] 0.3877188  0.9217777</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># S^t xが無相関になる線形変換です.</span>
+trans.S &lt;-<span class="kw">t</span>( <span class="kw">t</span>(S) <span class="op">%*%</span><span class="st"> </span><span class="kw">rbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width))
+<span class="co"># 変換後の共分散行列は対角成分が0,対角要素が固有値になっている. var(trans.S)</span>
+<span class="kw">var</span>(trans.S)</code></pre></div>
+<pre><code>             [,1]         [,2]
+[1,] 3.661238e+00 5.170473e-17
+[2,] 5.170473e-17 3.604607e-02</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 回転後のデータのプロット</span>
+data_Nocorr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(trans.S,
+                         <span class="dt">types =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;s&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;c&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;v&quot;</span>,<span class="dv">50</span>)))
+
+<span class="kw">colnames</span>(data_Nocorr) &lt;-<span class="st"> </span><span class="kw">colnames</span>(data_stand)
+<span class="kw">summary</span>(data_Nocorr)</code></pre></div>
+<pre><code>  Petal.Length     Petal.Width      types 
+ Min.   :0.9993   Min.   :-0.8807   c:50  
+ 1st Qu.:1.5524   1st Qu.:-0.4689   s:50  
+ Median :4.4944   Median :-0.3585   v:50  
+ Mean   :3.9290   Mean   :-0.3515         
+ 3rd Qu.:5.4377   3rd Qu.:-0.2275         
+ Max.   :7.2520   Max.   : 0.2349         </code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>data_Nocorr,<span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length,
+                     <span class="dt">y =</span> Petal.Width,
+                     <span class="dt">label =</span> types,
+                     <span class="dt">color =</span> types))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>types),<span class="dt">hjust=</span><span class="dv">0</span>, <span class="dt">vjust=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Correlation&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-19-1.png" width="576" /></p>
+</section><section id="アヤメデータを用いた白色化" class="slide level2">
+<h2>アヤメデータを用いた白色化</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 固有値の平方根の行列とその逆行列を計算 </span>
+Lambda &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">eigen</span>(<span class="kw">var</span>(
+                       <span class="kw">cbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width)))<span class="op">$</span>values))
+inv.Lambda &lt;-<span class="st"> </span><span class="kw">solve</span>(Lambda)
+<span class="co"># 白色化変換</span>
+whi.S &lt;-<span class="st"> </span><span class="kw">t</span>(inv.Lambda <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(S) <span class="op">%*%</span>
+<span class="st">               </span>(<span class="kw">rbind</span>(iris<span class="op">$</span>Petal.Length,iris<span class="op">$</span>Petal.Width)<span class="op">-</span>mu) )
+<span class="kw">var</span>(whi.S)</code></pre></div>
+<pre><code>             [,1]         [,2]
+[1,] 1.000000e+00 2.554238e-16
+[2,] 2.554238e-16 1.000000e+00</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 回転後のデータのプロット</span>
+data_white &lt;-<span class="st"> </span><span class="kw">data.frame</span>(whi.S,
+                         <span class="dt">types =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;s&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;c&quot;</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="st">&quot;v&quot;</span>,<span class="dv">50</span>)))
+
+<span class="kw">colnames</span>(data_white) &lt;-<span class="st"> </span><span class="kw">colnames</span>(data_stand)
+<span class="kw">summary</span>(data_white)</code></pre></div>
+<pre><code>  Petal.Length      Petal.Width       types 
+ Min.   :-1.5311   Min.   :-2.78739   c:50  
+ 1st Qu.:-1.2421   1st Qu.:-0.61810   s:50  
+ Median : 0.2955   Median :-0.03646   v:50  
+ Mean   : 0.0000   Mean   : 0.00000         
+ 3rd Qu.: 0.7885   3rd Qu.: 0.65326         
+ Max.   : 1.7367   Max.   : 3.08878         </code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>data_white,<span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length,
+                     <span class="dt">y =</span> Petal.Width,
+                     <span class="dt">label =</span> types,
+                     <span class="dt">color =</span> types))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>types),<span class="dt">hjust=</span><span class="dv">0</span>, <span class="dt">vjust=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;White&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="576" /></p>
+</section><section class="slide level2">
+
+<p>まとめてプロット</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_d &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">data.frame</span>(data,<span class="dt">pro =</span> <span class="st">&quot;Raw&quot;</span>),
+                <span class="kw">data.frame</span>(data_stand,<span class="dt">pro =</span> <span class="st">&quot;Standard&quot;</span>),
+                <span class="kw">data.frame</span>(data_Nocorr,<span class="dt">pro =</span> <span class="st">&quot;Nocorre&quot;</span>),
+                <span class="kw">data.frame</span>(data_white,<span class="dt">pro =</span> <span class="st">&quot;White&quot;</span>))
+<span class="kw">ggplot</span>(<span class="dt">data=</span>plot_d,<span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">label =</span> types, <span class="dt">color =</span> types))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>types),<span class="dt">hjust=</span><span class="dv">0</span>, <span class="dt">vjust=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>pro,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-23-1.png" width="576" /></p>
+</section></section>
+<section><section id="課題" class="titleslide slide level1"><h1>課題</h1></section><section class="slide level2">
+
+<h3 id="課題1" class="tabset tabset-fade">課題1</h3>
+<p>[0,1]の範囲で等間隔に20個の配列xを準備し、次の関数に従う乱数をxの点で発生させ、発生した乱数と関数を並べてプロットしなさい。</p>
+<p><span class="math display">\[
+f(x) = 0.5 + 0.4\cos(2\pi x) - \sin(2\pi x) +\varepsilon = h(x) + \varepsilon, \\
+\varepsilon\sim N(0,1)
+\]</span></p>
+</section><section class="slide level2">
+
+<h3 id="解答">解答</h3>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" /></p>
+</section><section class="slide level2">
+
+<h3 id="課題2" class="tabset tabset-fade">課題2</h3>
+<p>課題1の式について、配列xを用いて、p次多項式による回帰を<span class="math inline">\(p=1\sim 10\)</span>にて100回づつ行い、実際の値との差分(mse)の平均が最も小さくなるpを見つけ、そのpでの近似曲線を一つプロットしなさい。</p>
+<p><span class="math inline">\(p\)</span>次多項式</p>
+<p><span class="math display">\[
+y(x, a) = a_0 + a_1 x + a_2 x^2 + \cdots + a_p x^p, \\
+a = (a_0, a_1, a_2, \ldots, a_p )^T
+\]</span></p>
+</section><section class="slide level2">
+
+<h3 id="解答-1">解答</h3>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="576" /></p>
+</section><section class="slide level2">
+
+<p><img src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" /></p>
+</section><section class="slide level2">
+
+<h3 id="課題3" class="tabset tabset-fade">課題3</h3>
+<p>RのMASS パッケージには, 200名のピマ・インディアンの女性の糖尿病に関する学習データ Pima.tr と 332 名のテストデータ Pima.te がある.</p>
+<p>学習データについて、x軸bmi、y軸ageとして、糖尿病かどうかで色付けしてプロットせよ。<br />
+また、標準化、無相関化、白色化を行い、同じようにプロットせよ。</p>
+</section><section class="slide level2">
+
+<h3 id="解答-2">解答</h3>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="576" /></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
