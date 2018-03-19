@@ -490,7 +490,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title"><dl>
 <dt>情報工学実験3</dt>
-<dd>パターン認識I 第一回
+<dd>パターン認識 第一回
 </dd>
 <dd>モデル評価とデータ前処理
 </dd>
@@ -499,18 +499,19 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h3 class="date">2018-02-09</h3>
 </section>
 
-<section><section id="パッケージのインストールと読み込み" class="titleslide slide level1"><h1>パッケージのインストールと読み込み</h1></section><section id="使用するパッケージを自動インストールして読み込む" class="slide level2">
-<h2>使用するパッケージを自動インストールして読み込む。</h2>
+<section><section id="準備" class="titleslide slide level1"><h1>準備</h1></section><section id="パッケージのインストールと読み込み" class="slide level2">
+<h2>パッケージのインストールと読み込み</h2>
+<p>使用するパッケージを自動インストールして読み込む。</p>
 <p>今回使用するパッケージは</p>
 <ul>
 <li>ggplot2</li>
+<li>dplyr</li>
 <li>tidyr</li>
-<li>reshape2</li>
 <li>MASS</li>
 </ul>
 <p>MASSはデフォルトパッケージだが、更新したバージョンのデータセットを用いるので、インストールする。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 持ってないパッケージはインストールする</span>
-targetPackages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;reshape2&quot;</span>,<span class="st">&quot;MASS&quot;</span>)
+targetPackages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>,<span class="st">&quot;MASS&quot;</span>)
 newPackages &lt;-<span class="st"> </span>targetPackages[<span class="op">!</span>(targetPackages <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>])]
 <span class="cf">if</span> (<span class="kw">length</span>(newPackages)) <span class="kw">install.packages</span>(newPackages, <span class="dt">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>)
 <span class="cf">for</span> (package <span class="cf">in</span> targetPackages) <span class="kw">library</span>(package, <span class="dt">character.only =</span> T)</code></pre></div>
@@ -594,7 +595,7 @@ fit_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span 
                        <span class="dt">p1 =</span> fit.p1<span class="op">$</span>fit.hx,
                        <span class="dt">p3 =</span> fit.p3<span class="op">$</span>fit.hx,
                        <span class="dt">p6 =</span> fit.p6<span class="op">$</span>fit.hx,
-                       <span class="dt">p10 =</span> fit.p10<span class="op">$</span>fit.hx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="st">&quot;x&quot;</span>)
+                       <span class="dt">p10 =</span> fit.p10<span class="op">$</span>fit.hx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(kagi,atai,<span class="op">-</span>x)
 
 x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">11</span>)
 <span class="co"># 区間[0,1]を11分割した系列</span>
@@ -611,17 +612,17 @@ fit_data2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span
                        <span class="dt">p1 =</span> fit.p1<span class="op">$</span>fit.hx,
                        <span class="dt">p3 =</span> fit.p3<span class="op">$</span>fit.hx,
                        <span class="dt">p6 =</span> fit.p6<span class="op">$</span>fit.hx,
-                       <span class="dt">p10 =</span> fit.p10<span class="op">$</span>fit.hx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="st">&quot;x&quot;</span>)</code></pre></div>
+                       <span class="dt">p10 =</span> fit.p10<span class="op">$</span>fit.hx) <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">gather</span>(kagi,atai,<span class="op">-</span>x)</code></pre></div>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> true_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;True&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sample_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;pattern1&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sample_data2, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> y,<span class="dt">color =</span> <span class="st">&quot;pattern2&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> value, <span class="dt">color =</span> <span class="st">&quot;pattern1&quot;</span>),<span class="dt">linetype=</span><span class="dv">2</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data2, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> value, <span class="dt">color =</span> <span class="st">&quot;pattern2&quot;</span>),<span class="dt">linetype=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> atai, <span class="dt">color =</span> <span class="st">&quot;pattern1&quot;</span>),<span class="dt">linetype=</span><span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> fit_data2, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span> atai, <span class="dt">color =</span> <span class="st">&quot;pattern2&quot;</span>),<span class="dt">linetype=</span><span class="dv">3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="co">#geom_point(data = pre_data, aes(x=x, y= value, color = variable)) +</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>kagi,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="co">#+ theme(legend.position = &quot;none&quot;)</span></code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="576" /></p>
 </section><section class="slide level2">
@@ -667,8 +668,8 @@ E_D \{ (y(x; D) -E_D\{ y(x;D)\})^2  \}
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out&lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,trade.off)
 <span class="kw">ggplot</span>(
   <span class="kw">data.frame</span>(
-    <span class="kw">cbind</span>(<span class="kw">t</span>(out),<span class="dt">p =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="st">&quot;p&quot;</span>)),
-  <span class="kw">aes</span>(<span class="dt">x=</span>p,<span class="dt">y=</span>value,<span class="dt">color=</span>variable))<span class="op">+</span>
+    <span class="kw">cbind</span>(<span class="kw">t</span>(out),<span class="dt">p =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(kagi, atai , <span class="op">-</span>p)),
+  <span class="kw">aes</span>(<span class="dt">x=</span>p,<span class="dt">y=</span>atai,<span class="dt">color=</span>kagi))<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">1.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="576" /></p>
 <p>この図より, 最適な多項式次数は, 平均２乗誤差が最小となる<span class="math inline">\(p=3\)</span>を選択すれば良い.</p>
@@ -873,7 +874,13 @@ data_white &lt;-<span class="st"> </span><span class="kw">data.frame</span>(whi.
 </section></section>
 <section><section id="課題" class="titleslide slide level1"><h1>課題</h1></section><section class="slide level2">
 
-<h3 id="課題1" class="tabset tabset-fade">課題1</h3>
+<h3 id="課題1">課題1</h3>
+<p>今日の実験の要点を、まとめなさい。<br />
+箇条書きでも、普通の文章でも構いません。<br />
+多くても500字程度でいいです。</p>
+</section><section class="slide level2">
+
+<h3 id="課題2" class="tabset tabset-fade">課題2</h3>
 <p>[0,1]の範囲で等間隔に20個の配列xを準備し、次の関数に従う乱数をxの点で発生させ、発生した乱数と関数を並べてプロットしなさい。</p>
 <p><span class="math display">\[
 f(x) = 0.5 + 0.4\cos(2\pi x) - \sin(2\pi x) +\varepsilon = h(x) + \varepsilon, \\
@@ -885,7 +892,7 @@ f(x) = 0.5 + 0.4\cos(2\pi x) - \sin(2\pi x) +\varepsilon = h(x) + \varepsilon, \
 <p><img src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="576" /></p>
 </section><section class="slide level2">
 
-<h3 id="課題2" class="tabset tabset-fade">課題2</h3>
+<h3 id="課題3" class="tabset tabset-fade">課題3</h3>
 <p>課題1の式について、配列xを用いて、p次多項式による回帰を<span class="math inline">\(p=1\sim 10\)</span>にて100回づつ行い、実際の値との差分(mse)の平均が最も小さくなるpを見つけ、そのpでの近似曲線を一つプロットしなさい。</p>
 <p><span class="math inline">\(p\)</span>次多項式</p>
 <p><span class="math display">\[
@@ -901,7 +908,7 @@ a = (a_0, a_1, a_2, \ldots, a_p )^T
 <p><img src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="576" /></p>
 </section><section class="slide level2">
 
-<h3 id="課題3" class="tabset tabset-fade">課題3</h3>
+<h3 id="課題4" class="tabset tabset-fade">課題4</h3>
 <p>RのMASS パッケージには, 200名のピマ・インディアンの女性の糖尿病に関する学習データ Pima.tr と 332 名のテストデータ Pima.te がある.</p>
 <p>学習データについて、x軸bmi、y軸ageとして、糖尿病かどうかで色付けしてプロットせよ。<br />
 また、標準化、無相関化、白色化を行い、同じようにプロットせよ。</p>
