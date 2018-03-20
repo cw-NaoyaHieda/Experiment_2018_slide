@@ -50,7 +50,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/league.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -499,6 +499,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h3 class="date">2018-02-09</h3>
 </section>
 
+<section><section id="はじめに" class="titleslide slide level1"><h1>はじめに</h1></section><section id="パターン認識とは" class="slide level2">
+<h2>パターン認識とは</h2>
+<p>画像・音声などの雑多な情報を含むデータの中から、一定の規則や意味を持つ対象を選別して取り出す処理である。</p>
+<p>人間には未来のことは正確にはわからないが、現在できる限りのいい選択をしたい。といのがモチベーション。</p>
+</section></section>
 <section><section id="準備" class="titleslide slide level1"><h1>準備</h1></section><section id="パッケージのインストールと読み込み" class="slide level2">
 <h2>パッケージのインストールと読み込み</h2>
 <p>使用するパッケージを自動インストールして読み込む。</p>
@@ -676,7 +681,9 @@ E_D \{ (y(x; D) -E_D\{ y(x;D)\})^2  \}
 </section></section>
 <section><section id="データの前処理" class="titleslide slide level1"><h1>1.1.2 データの前処理</h1></section><section id="なぜ前処理をするか" class="slide level2">
 <h2>なぜ前処理をするか</h2>
-<p>入力データ<span class="math inline">\(x\)</span>は, その特徴に応じて様々な性質をもつであろう. そこで, 分析に先立ち, あらかじめ入力データの顕著な特性が大きく識別結果に影響しないように, データの前処理をすることが一般的である. 前処理には, 平均0, 分散１に基準化する標準化や, 変数間の相関関係を排除した無相関化, 標準化と無相関化を合わせた白色化等が用いられる.</p>
+<p>入力データ<span class="math inline">\(x\)</span>は, その特徴に応じて様々な性質をもつであろう.<br />
+そこで, 分析に先立ち,あらかじめ入力データの顕著な特性が大きく識別結果に影響しないように, データの前処理をすることが一般的である.<br />
+前処理には, 平均0, 分散１に基準化する標準化や, 変数間の相関関係を排除した無相関化, 標準化と無相関化を合わせた白色化等が用いられる.</p>
 </section><section id="アヤメデータの標準化" class="slide level2">
 <h2>アヤメデータの標準化</h2>
 <p>Rのデータセット、アヤメデータを用いる。</p>
@@ -910,8 +917,8 @@ a = (a_0, a_1, a_2, \ldots, a_p )^T
 
 <h3 id="課題4" class="tabset tabset-fade">課題4</h3>
 <p>RのMASS パッケージには, 200名のピマ・インディアンの女性の糖尿病に関する学習データ Pima.tr と 332 名のテストデータ Pima.te がある.</p>
-<p>学習データについて、x軸bmi、y軸ageとして、糖尿病かどうかで色付けしてプロットせよ。<br />
-また、標準化、無相関化、白色化を行い、同じようにプロットせよ。</p>
+<p>学習データについて、x軸bmi、y軸ageとして、糖尿病かどうかで色付けしてプロットしなさい。<br />
+また、標準化、無相関化、白色化を行い、同じようにプロットしなさい。</p>
 </section><section class="slide level2">
 
 <h3 id="解答-2">解答</h3>
